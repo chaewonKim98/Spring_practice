@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="kr.smhrd.mapper.BoardMapper">   <!-- 패키지와 클래스를 해두기 인터페이스 이름이랑 똑같아야함 보드매퍼에서 이 네임스페이스를 통해서 찾아온다-->
+    <select id="boardList" resultType="boardVO">  <!-- DAO에 있는 리스트 뒤에 보드리스트를 가져옴 -->
+        select * from tbl_board
+    </select>
+     <insert id="boardInsert" parameterType="boardVO">
+        insert into tbl_board(title,contents,writer) 
+        values(#{title},#{contents},#{writer})
+    </insert>
+    <delete id="boardDelete" parameterType="int">
+        <!-- 한개짜리는 idx->cnt로 바꿔도 되지만 -->
+        delete from tbl_board where idx=#{idx}
+    </delete>
+     <update id="increase">
+
+        update tbl_board set count = count + 1 where no = #{no}
+
+    </update>
+    
+     <select id="boardSearch" resultType="boardVO" parameterType="searchVO">
+         select * from tbl_board where ${part} like concat('%',#{keyword},'%')
+     </select>
+</mapper>

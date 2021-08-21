@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE configuration
+  PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-config.dtd">
+<configuration>   <!-- 태그는 마음대로 쓸수 없다 정해진 태그임(dtd태그를 정의한 문서임)여기에 정의됨 -->
+	<!-- 정의되지않은 태그는 쓸수없다 -->
+	<!-- 1.환경설정파일이 필요 -->
+	<!-- 2. 프로퍼티스파일(속성)이 필요 -->
+	<!-- url, driver, username등등을 연결해줘야함(db.properties에서!) -->
+	<properties resource="kr/smhrd/mybatis/db.properties" />
+	<typeAliases>
+		<typeAlias type="kr.smhrd.model.BoardVO" alias="boardVO" />
+		<typeAlias type="kr.smhrd.model.UserVO" alias="userVO" />
+	</typeAliases>
+	<environments default="development">
+		<environment id="development">
+			<transactionManager type="JDBC" />
+			<dataSource type="POOLED">
+				<property name="driver" value="${driver}" />
+				<property name="url" value="${url}" />
+				<property name="username" value="${username}" />
+				<property name="password" value="${password}" />
+			</dataSource>
+		</environment>
+	</environments>
+	<mappers>
+		<mapper resource="kr/smhrd/mybatis/BoardMapper.xml" />
+	</mappers>
+</configuration>
